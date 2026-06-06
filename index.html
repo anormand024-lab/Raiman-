@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Lumino — Jeu de Plateforme</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ÉCRAN D'ACCUEIL -->
+  <div id="screen-title" class="screen active">
+    <div class="title-bg">
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3"></div>
+    </div>
+    <div class="title-content">
+      <h1 class="game-title">
+        <span class="t-l">L</span><span class="t-u">U</span><span class="t-m">M</span><span class="t-i">I</span><span class="t-n">N</span><span class="t-o">O</span>
+      </h1>
+      <p class="subtitle">Un monde magique vous attend</p>
+      <div class="title-char"></div>
+      <button id="btn-play" class="btn-main">▶ JOUER</button>
+      <div class="controls-hint">
+        <span>⌨ Flèches / WASD · Z pour sauter</span>
+        <span>📱 Pad virtuel sur mobile</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉCRAN DE JEU -->
+  <div id="screen-game" class="screen">
+    <div id="hud">
+      <div id="hud-lives">❤️ <span id="lives-count">3</span></div>
+      <div id="hud-level">Niveau <span id="level-num">1</span></div>
+      <div id="hud-score">⭐ <span id="score-count">0</span></div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- PAD VIRTUEL TACTILE -->
+    <div id="virtual-pad">
+      <div id="pad-left" class="pad-btn pad-dir" data-key="left">◀</div>
+      <div id="pad-right" class="pad-btn pad-dir" data-key="right">▶</div>
+      <div id="pad-jump" class="pad-btn pad-action" data-key="jump">↑</div>
+      <div id="pad-attack" class="pad-btn pad-action" data-key="attack">👊</div>
+    </div>
+  </div>
+
+  <!-- ÉCRAN DE MORT -->
+  <div id="screen-death" class="screen">
+    <div class="overlay-content">
+      <h2>💀 Oups !</h2>
+      <p>Tu t'es fait avoir…</p>
+      <p id="death-score">Score: 0</p>
+      <button id="btn-retry" class="btn-main">🔄 Réessayer</button>
+      <button id="btn-menu" class="btn-sec">Menu</button>
+    </div>
+  </div>
+
+  <!-- ÉCRAN DE VICTOIRE -->
+  <div id="screen-win" class="screen">
+    <div class="overlay-content win-overlay">
+      <div class="stars-anim">⭐⭐⭐</div>
+      <h2>🎉 Niveau terminé !</h2>
+      <p id="win-score">Score: 0</p>
+      <button id="btn-next" class="btn-main">Niveau suivant ▶</button>
+      <button id="btn-menu2" class="btn-sec">Menu</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

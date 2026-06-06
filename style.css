@@ -1,0 +1,317 @@
+/* ==============================
+   LUMINO — PLATFORMER CSS
+   ============================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+
+:root {
+  --sky: #7ecbff;
+  --sky2: #b8e4ff;
+  --sun: #ffe066;
+  --green: #5ecf3e;
+  --green2: #3faa1e;
+  --brown: #b97a3a;
+  --dark: #2d1b00;
+  --text: #fff;
+  --accent: #ff7c2a;
+  --accent2: #ff4fa3;
+  --coin: #ffe066;
+  --shadow: rgba(0,0,0,0.18);
+  --pad-bg: rgba(0,0,0,0.45);
+  --pad-active: rgba(255,255,255,0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+  background: var(--sky);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ======= SCREENS ======= */
+.screen {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+}
+.screen.active {
+  opacity: 1; pointer-events: all;
+}
+
+/* ======= TITLE SCREEN ======= */
+#screen-title {
+  background: linear-gradient(180deg, #4bb8ff 0%, #a8e6ff 55%, #7de87d 100%);
+  flex-direction: column;
+}
+
+.title-bg {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50px;
+  opacity: 0.85;
+  filter: blur(1px);
+}
+.cloud::before, .cloud::after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+.c1 { width: 160px; height: 55px; top: 12%; left: 5%; animation: drift 14s linear infinite; }
+.c1::before { width: 70px; height: 70px; top: -30px; left: 20px; }
+.c1::after  { width: 55px; height: 55px; top: -20px; left: 65px; }
+
+.c2 { width: 120px; height: 40px; top: 22%; left: 55%; animation: drift 20s linear infinite; opacity: 0.7; }
+.c2::before { width: 55px; height: 55px; top: -25px; left: 15px; }
+.c2::after  { width: 45px; height: 45px; top: -15px; left: 55px; }
+
+.c3 { width: 90px; height: 32px; top: 8%; right: 10%; animation: drift 17s 5s linear infinite; opacity: 0.65; }
+.c3::before { width: 40px; height: 40px; top: -18px; left: 12px; }
+.c3::after  { width: 35px; height: 35px; top: -12px; left: 42px; }
+
+@keyframes drift {
+  from { transform: translateX(-200px); }
+  to   { transform: translateX(110vw); }
+}
+
+.title-content {
+  position: relative;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px;
+}
+
+.game-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(3rem, 14vw, 7rem);
+  letter-spacing: 0.06em;
+  filter: drop-shadow(0 6px 0 rgba(0,0,0,0.18));
+  display: flex; gap: 2px;
+}
+.game-title span {
+  display: inline-block;
+  animation: bounce-letter 1.8s ease-in-out infinite;
+}
+.t-l  { color: #ff4fa3; animation-delay: 0s; }
+.t-u  { color: #ff7c2a; animation-delay: 0.1s; }
+.t-m  { color: #ffe066; animation-delay: 0.2s; }
+.t-i  { color: #5ecf3e; animation-delay: 0.3s; }
+.t-n  { color: #4bb8ff; animation-delay: 0.4s; }
+.t-o  { color: #b47aff; animation-delay: 0.5s; }
+
+@keyframes bounce-letter {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  letter-spacing: 0.05em;
+}
+
+.title-char {
+  width: 60px; height: 80px;
+  background: #ff7c2a;
+  border-radius: 50% 50% 40% 40%;
+  position: relative;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+  animation: char-idle 1s ease-in-out infinite alternate;
+  margin: 8px 0;
+}
+.title-char::before {
+  content: '';
+  position: absolute;
+  width: 50px; height: 50px;
+  background: #ffd1a8;
+  border-radius: 50%;
+  top: 5px; left: 5px;
+}
+.title-char::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  background: var(--dark);
+  border-radius: 50%;
+  top: 22px; left: 18px;
+  box-shadow: 16px 0 0 var(--dark);
+}
+
+@keyframes char-idle {
+  from { transform: translateY(0) rotate(-3deg); }
+  to   { transform: translateY(-6px) rotate(3deg); }
+}
+
+.btn-main {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.4rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 48px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #c25010, 0 8px 20px rgba(0,0,0,0.2);
+  transition: transform 0.1s, box-shadow 0.1s;
+  letter-spacing: 0.06em;
+}
+.btn-main:hover, .btn-main:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #c25010, 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-sec {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.25);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 50px;
+  padding: 10px 32px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-sec:hover { background: rgba(255,255,255,0.4); }
+
+.controls-hint {
+  display: flex; flex-direction: column; gap: 4px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+  font-weight: 700;
+}
+
+/* ======= GAME SCREEN ======= */
+#screen-game {
+  display: flex; flex-direction: column;
+  background: #7ecbff;
+  z-index: 1;
+}
+
+#hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px);
+  z-index: 20;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+#gameCanvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  image-rendering: pixelated;
+}
+
+/* ======= VIRTUAL PAD ======= */
+#virtual-pad {
+  position: fixed;
+  bottom: 20px;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 20px;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.pad-btn {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--pad-bg);
+  border: 2.5px solid rgba(255,255,255,0.35);
+  color: white;
+  font-size: 1.5rem;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: all;
+  transition: background 0.1s, transform 0.1s;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.pad-btn.pressed, .pad-btn:active {
+  background: var(--pad-active);
+  transform: scale(0.92);
+}
+
+.pad-dir { font-size: 1.8rem; }
+
+/* gauche + droite côte à côte */
+#virtual-pad .left-group {
+  display: flex; gap: 8px; align-items: center;
+}
+.right-group {
+  display: flex; gap: 10px; align-items: center;
+}
+
+/* ======= OVERLAY SCREENS ======= */
+#screen-death, #screen-win {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+}
+
+.overlay-content {
+  background: white;
+  border-radius: 24px;
+  padding: 40px 48px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  display: flex; flex-direction: column; gap: 16px; align-items: center;
+}
+.overlay-content h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2.2rem;
+  color: var(--dark);
+}
+.overlay-content p {
+  font-size: 1rem;
+  color: #555;
+  font-weight: 700;
+}
+
+.win-overlay h2 { color: #e8700a; }
+
+.stars-anim {
+  font-size: 2.5rem;
+  animation: stars-pop 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes stars-pop {
+  0%   { transform: scale(0) rotate(-20deg); }
+  80%  { transform: scale(1.2) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 600px) {
+  .btn-main { font-size: 1.1rem; padding: 12px 36px; }
+  .overlay-content { padding: 28px 28px; }
+  .overlay-content h2 { font-size: 1.6rem; }
+}
+
+/* On cache le pad sur desktop */
+@media (hover: hover) and (pointer: fine) {
+  #virtual-pad { display: none; }
+}
